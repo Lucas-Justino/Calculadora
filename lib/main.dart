@@ -143,7 +143,6 @@ class _Calculadora extends State<Calculadora> {
                 height: 350,
                 width: 500,
                 child: Container(
-                  color: Colors.deepPurple,
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: Text(
