@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Botao extends StatelessWidget {
-  Botao(this.corBotao, {super.key});
+  Botao(this.corBotao, this.tecla, this.pressionarTecla, {super.key});
 
   final corBotao;
+  final String tecla;
+  final void Function(String teclaPressionada) pressionarTecla;
+
 
   @override
   Widget build(context) {
@@ -11,7 +14,9 @@ class Botao extends StatelessWidget {
       height: 60,
       width: 90,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          pressionarTecla(tecla);
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: corBotao,
           shadowColor: Colors.black,
@@ -20,9 +25,10 @@ class Botao extends StatelessWidget {
           ),
         ),
         child: Text(
-          'C',
+          tecla,
           style: TextStyle(
             color: Colors.white,
+            fontSize: 20,
           ),
         ),
       ),
