@@ -14,14 +14,20 @@ class Calculadora extends StatefulWidget {
   }
 }
 
-class _Calculadora extends State<Calculadora>{
-
+class _Calculadora extends State<Calculadora> {
   String numero = '';
 
-  void calcular(String teclaPressionada){
-    switch(teclaPressionada){
+  double primeiroNumero = 0.0;
+
+  String operacao = '';
+
+  String answer = '';
+
+  void calcular(String teclaPressionada) {
+    switch (teclaPressionada) {
       case 'C':
         setState(() {
+          answer = numero;
           numero = '';
         });
         break;
@@ -34,27 +40,67 @@ class _Calculadora extends State<Calculadora>{
         break;
       case '%':
         setState(() {
-          numero += '%';
+          primeiroNumero = double.parse(numero);
+          numero = '';
+          operacao = teclaPressionada;
         });
         break;
       case '/':
         setState(() {
-          numero += '/';
+          primeiroNumero = double.parse(numero);
+          numero = '';
+          operacao = teclaPressionada;
         });
         break;
       case '*':
         setState(() {
-          numero += '*';
+          primeiroNumero = double.parse(numero);
+          numero = '';
+          operacao = teclaPressionada;
         });
         break;
       case '-':
         setState(() {
-          numero += '-';
+          primeiroNumero = double.parse(numero);
+          numero = '';
+          operacao = teclaPressionada;
         });
         break;
       case '+':
         setState(() {
-          numero += '+';
+          primeiroNumero = double.parse(numero);
+          numero = '';
+          operacao = teclaPressionada;
+        });
+        break;
+      case '=':
+        if (operacao == '+') {
+          setState(() {
+            numero = (primeiroNumero + double.parse(numero)).toString();
+          });
+        } else if (operacao == '-') {
+          setState(() {
+            numero = (primeiroNumero - double.parse(numero)).toString();
+          });
+        } else if (operacao == '*') {
+          setState(() {
+            numero = (primeiroNumero * double.parse(numero)).toString();
+          });
+        } else if (operacao == '/') {
+          setState(() {
+            numero = (primeiroNumero / double.parse(numero)).toString();
+          });
+        } else if (operacao == '%') {
+          setState(() {
+            numero = (primeiroNumero % double.parse(numero)).toString();
+          });
+        } else if (operacao == '') {}
+        break;
+      case '.':
+        setState(() {
+          if (!numero.contains('.')) {
+            numero += '.';
+          }
         });
         break;
       case '1':
@@ -69,6 +115,15 @@ class _Calculadora extends State<Calculadora>{
       case '0':
         setState(() {
           numero += teclaPressionada;
+
+          if (!numero.contains('.')) {
+            numero = int.parse(numero).toString();
+          }
+        });
+        break;
+      case 'ANS':
+        setState(() {
+          numero = numero;
         });
         break;
     }
@@ -109,5 +164,4 @@ class _Calculadora extends State<Calculadora>{
       ),
     );
   }
-
 }
